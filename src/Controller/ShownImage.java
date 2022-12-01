@@ -25,6 +25,12 @@ public class ShownImage {
     }
 
     public ImageView getImgView(){
+        fitToScreen();
         return currImgView;
+    }
+
+    private void fitToScreen(){
+        currImgView.setFitHeight(control.getSceneHeight());
+        currImgView.setFitWidth(control.getSceneWidth());
     }
 }
