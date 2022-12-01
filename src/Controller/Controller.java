@@ -2,6 +2,8 @@ package Controller;
 
 import Colours.ThemeControl;
 import View.MainView;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
@@ -30,7 +32,18 @@ public class Controller {
 
         mView.initUI();
         scene = new Scene(mView.getbPane(), sceneWidth, sceneHeight);
-
+        scene.widthProperty().addListener(new ChangeListener<Number>() {
+            @Override public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneWidth, Number newSceneWidth) {
+                imageV = picture.getImgView();
+                mView.setCurrImage(imageV);
+            }
+        });
+        scene.heightProperty().addListener(new ChangeListener<Number>() {
+            @Override public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneHeight, Number newSceneHeight) {
+                imageV = picture.getImgView();
+                mView.setCurrImage(imageV);
+            }
+        });
 
         this.stage.setScene(scene);
         this.stage.show();
