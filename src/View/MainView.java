@@ -5,7 +5,7 @@ import Controller.Controller;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-import javax.swing.text.html.ImageView;
+import javafx.scene.image.ImageView;
 
 public class MainView {
     ImageView currImage;
@@ -21,8 +21,13 @@ public class MainView {
     public void initUI(){ //maybe have starting image file path passed in here
         bPane = new BorderPane();
         bPane.setStyle(themeCont.getBackColour());
+
+        bPane.setCenter(currImage);
     }
 
+    public void setCurrImage(ImageView imgV){
+        this.currImage = imgV;
+    }
     public BorderPane getbPane(){
         return this.bPane;
     }
