@@ -14,7 +14,8 @@ public class ShownImage {
         this.currImgPath = initialPath;
     }
     public ShownImage(){
-        this.currImgPath = "C:\\Users\\ashka\\Desktop\\Projects\\SimplePhotoViewer\\TestImages\\DSC_4236_01.jpg";
+        this.currImgPath = System.getProperty("user.dir") + "\\TestImages\\DSC_4236_01.jpg"; // gets the project directory then appends the test image location
+
         this.currImg = new Image(currImgPath);
         currImgView = new ImageView(currImg);
     }
