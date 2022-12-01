@@ -8,7 +8,8 @@ public class ShownImage {
 
     String currImgPath;
     Image currImg;
-    javafx.scene.image.ImageView currImgView;
+    ImageView currImgView;
+    Controller control;
 
     public ShownImage(String initialPath){
         this.currImgPath = initialPath;
@@ -18,6 +19,9 @@ public class ShownImage {
 
         this.currImg = new Image(currImgPath);
         currImgView = new ImageView(currImg);
+    }
+    public void setController(Controller control){
+        this.control = control;
     }
 
     public ImageView getImgView(){

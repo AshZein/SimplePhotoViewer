@@ -21,6 +21,7 @@ public class Controller {
         this.mView = new MainView(this);
 
         this.picture = new ShownImage();
+        this.picture.setController(this);
         imageV = picture.getImgView();
         mView.setCurrImage(imageV);
 
