@@ -32,6 +32,8 @@ public class Controller {
 
         mView.initUI();
         scene = new Scene(mView.getbPane(), sceneWidth, sceneHeight);
+
+        // got following listeners from: https://blog.idrsolutions.com/2012/11/adding-a-window-resize-listener-to-javafx-scene/
         scene.widthProperty().addListener(new ChangeListener<Number>() {
             @Override public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneWidth, Number newSceneWidth) {
                 imageV = picture.getImgView();
