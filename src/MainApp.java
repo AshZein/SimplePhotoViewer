@@ -1,3 +1,6 @@
+import Colours.ThemeControl;
+import View.MainView;
+import Controller.Controller;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -7,18 +10,14 @@ import javafx.stage.Stage;
 import java.util.Objects;
 
 public class MainApp extends Application{
+    Controller control;
     public static void main(String[] args){
         launch(args);
     }
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("BasicThingTest.fxml")));
-
-        Scene scene = new Scene(root, 800, 500);
-
-        stage.setTitle("FXML TEST");
-        stage.setScene(scene);
-        stage.show();
+        control = new Controller(stage);
     }
+
 }
