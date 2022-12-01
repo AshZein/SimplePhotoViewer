@@ -15,8 +15,6 @@ public class MainApp extends Application{
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("BasicThingTest.fxml")));
 
-        root.getChildrenUnmodifiable().
-
         Scene scene = new Scene(root, 800, 500);
 
         stage.setTitle("FXML TEST");
