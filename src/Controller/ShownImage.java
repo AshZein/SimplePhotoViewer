@@ -15,6 +15,11 @@ public class ShownImage {
 
     public ShownImage(String initialPath){
         this.currImgPath = initialPath;
+
+        this.currImg = new Image(currImgPath);
+        aspectRatio[0] = currImg.getWidth() / currImg.getHeight();
+        aspectRatio[1] = 1;
+        currImgView = new ImageView(currImg);
     }
     public ShownImage(){
         this.currImgPath = System.getProperty("user.dir") + "\\TestImages\\DSC_4236_01.jpg"; // gets the project directory then appends the test image location
