@@ -11,6 +11,9 @@ public class ShownImage {
     ImageView currImgView;
     Controller control;
 
+    double actualWidth;
+    double actualHeight;
+
     double[] aspectRatio = new double[2]; //aspectRatio of the shown image
 
     public ShownImage(String initialPath){
@@ -39,7 +42,12 @@ public class ShownImage {
     }
 
     private void fitToScreen(){
-        currImgView.setFitHeight(control.getSceneHeight());
-        currImgView.setFitWidth(control.getSceneWidth());
+        currImgView.setFitHeight(actualHeight);
+        currImgView.setFitWidth(actualWidth);
+    }
+
+    public void updateDimensions(double width, double height){
+        this.actualHeight = height;
+        this.actualWidth = width;
     }
 }
