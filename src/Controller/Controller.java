@@ -23,25 +23,32 @@ public class Controller {
     public Controller(Stage stage){
         this.stage = stage;
         this.themeCont = new ThemeControl();
-        this.mView = new MainView(this);
 
         this.picture = new ShownImage();
         this.picture.setController(this);
-        imageV = picture.getImgView();
-        mView.setCurrImage(imageV);
+        this.picture.updateDimensions(sceneWidth, sceneHeight);
 
+        imageV = picture.getImgView();
+
+        mView = new MainView(this);
+        mView.setCurrImage(imageV);
         mView.initUI();
+
         scene = new Scene(mView.getbPane(), sceneWidth, sceneHeight);
 
         // got following listeners from: https://blog.idrsolutions.com/2012/11/adding-a-window-resize-listener-to-javafx-scene/
         scene.widthProperty().addListener(new ChangeListener<Number>() {
             @Override public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneWidth, Number newSceneWidth) {
+                setSceneWidth();
+
                 imageV = picture.getImgView();
                 mView.setCurrImage(imageV);
             }
         });
         scene.heightProperty().addListener(new ChangeListener<Number>() {
             @Override public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneHeight, Number newSceneHeight) {
+                setSceneHeight();
+
                 imageV = picture.getImgView();
                 mView.setCurrImage(imageV);
             }
@@ -55,17 +62,16 @@ public class Controller {
         return this.themeCont;
     }
 
-    public double getSceneWidth(){
-        if (!(scene == null)) {
-            sceneWidth = scene.getWidth();
-        }
-        return sceneWidth;
+    public void setSceneWidth(){
+        sceneHeight = sceneHeight * (scene.getWidth()/sceneWidth);
+        sceneWidth = scene.getWidth();
 
+        this.picture.updateDimensions(sceneWidth,sceneHeight);
     }
-    public double getSceneHeight(){
-        if(!(scene == null)){
-            sceneHeight =scene.getHeight();
-        }
-        return sceneHeight;
+    public void setSceneHeight(){
+        sceneHeight = scene.getHeight();
+        sceneWidth = sceneWidth *(scene.getHeight()/sceneHeight);
+
+        this.picture.updateDimensions(sceneWidth,sceneHeight);
     }
 }
