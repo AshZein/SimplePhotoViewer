@@ -90,7 +90,7 @@ public class MainView {
         // got following listeners from: https://blog.idrsolutions.com/2012/11/adding-a-window-resize-listener-to-javafx-scene/
         scene.widthProperty().addListener(new ChangeListener<Number>() {
             @Override public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneWidth, Number newSceneWidth) {
-                control.setSceneWidth(scene.getWidth());
+                control.setSceneWidth(scene.getWidth() - bPane.getRight().getLayoutBounds().getWidth() - bPane.getLeft().getLayoutBounds().getWidth());
 
                 imgV = control.getImage();
             }
