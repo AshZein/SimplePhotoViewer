@@ -11,26 +11,25 @@ public class ShownImage {
     ImageView currImgView;
     Controller control;
 
-    double actualWidth;
-    double actualHeight;
+    double sceneWidth;
+    double sceneHeight;
 
-    double[] aspectRatio = new double[2]; //aspectRatio of the shown image
 
     public ShownImage(String initialPath){
         this.currImgPath = initialPath;
 
         this.currImg = new Image(currImgPath);
-        aspectRatio[0] = currImg.getWidth() / currImg.getHeight();
-        aspectRatio[1] = 1;
         currImgView = new ImageView(currImg);
+
+        currImgView.setPreserveRatio(true);
     }
     public ShownImage(){
         this.currImgPath = System.getProperty("user.dir") + "\\TestImages\\DSC_4236_01.jpg"; // gets the project directory then appends the test image location
 
         this.currImg = new Image(currImgPath);
-        aspectRatio[0] = currImg.getWidth() / currImg.getHeight();
-        aspectRatio[1] = 1;
         currImgView = new ImageView(currImg);
+
+        currImgView.setPreserveRatio(true);
     }
     public void setController(Controller control){
         this.control = control;
@@ -42,12 +41,16 @@ public class ShownImage {
     }
 
     private void fitToScreen(){
-        currImgView.setFitHeight(actualHeight);
-        currImgView.setFitWidth(actualWidth);
+        this.currImgView.setFitHeight(sceneHeight);
+        this.currImgView.setFitWidth(sceneWidth);
     }
 
-    public void updateDimensions(double width, double height){
-        this.actualHeight = height;
-        this.actualWidth = width;
+
+    public void updateWidth(double width){
+        sceneWidth = width;
+    }
+
+    public void updateHeight(double height){
+        sceneHeight = height;
     }
 }
