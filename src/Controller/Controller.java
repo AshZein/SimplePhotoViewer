@@ -26,7 +26,8 @@ public class Controller {
 
         this.picture = new ShownImage();
         this.picture.setController(this);
-        this.picture.updateDimensions(sceneWidth, sceneHeight);
+        this.picture.updateHeight(sceneHeight);
+        this.picture.updateWidth(sceneWidth);
 
         imageV = picture.getImgView();
 
@@ -63,15 +64,13 @@ public class Controller {
     }
 
     public void setSceneWidth(){
-        sceneHeight = sceneHeight * (scene.getWidth()/sceneWidth);
         sceneWidth = scene.getWidth();
 
-        this.picture.updateDimensions(sceneWidth,sceneHeight);
+        this.picture.updateWidth(sceneWidth);
     }
     public void setSceneHeight(){
         sceneHeight = scene.getHeight();
-        sceneWidth = sceneWidth *(scene.getHeight()/sceneHeight);
 
-        this.picture.updateDimensions(sceneWidth,sceneHeight);
+        this.picture.updateHeight(sceneHeight);
     }
 }
