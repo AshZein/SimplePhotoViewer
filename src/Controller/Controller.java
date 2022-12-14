@@ -37,4 +37,10 @@ public class Controller {
     public ImageView getImage(){
         return imgD.getImage();
     }
+    public ImageView nextImage(){
+        return imgD.getNext();
+    }
+    public ImageView previousImage(){
+        return imgD.getPrevious();
+    }
 }
