@@ -56,6 +56,7 @@ public class ImgDeck {
      */
     public ImageView getImage(){
         shwnImg = new ImageView(imageDeck[index].getImage());
+        shwnImg.setId(imageDeck[index].getId());
         shwnImg.setPreserveRatio(true);
         shwnImg.setFitHeight(this.imgHeight);
         shwnImg.setFitWidth(this.imgWidth);
