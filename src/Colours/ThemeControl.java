@@ -10,8 +10,9 @@ public class ThemeControl {
     public ThemeControl(){
         themeOptions = new HashMap<>();
         themeOptions.put("Light", new LightTheme());
+        themeOptions.put("Dark", new DarkTheme());
 
-        currTheme = "Light";
+        currTheme = "Dark";
     }
 
     public String getBackColour(){
