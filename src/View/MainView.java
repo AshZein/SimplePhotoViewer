@@ -39,8 +39,8 @@ public class MainView {
     private void initUI(){ //maybe have starting image file path passed in here
         Button nextButton = new Button(">");
         nextButton.setId("Next");
-        nextButton.setPrefSize(100,40);
-        nextButton.setFont(new Font(22));
+        nextButton.setPrefSize(40,40);
+        nextButton.setFont(new Font(18));
         nextButton.setStyle("-fx-background-color:#121212; -fx-text-fill: #ffffff;");
         nextButton.setAlignment(Pos.CENTER);
 
