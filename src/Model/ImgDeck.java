@@ -13,7 +13,7 @@ public class ImgDeck {
     double imageDeckHeight = 50;
     double imageDeckEmphasis = 30;
     String[] imagePaths;
-    ShownImage shwnImg;
+    ImageView shwnImg;
     ImageView[] imageDeck;
     int index;
 
@@ -25,11 +25,9 @@ public class ImgDeck {
         imagePaths = f.list(); // listing all the files in the folder
         index = 0;
 
-        assert imagePaths != null;
-        shwnImg = new ShownImage(fPath + "\\" + imagePaths[index]); //first image in the folder
-
         this.imageDeck = new ImageView[20];
         createImageDeck();
+        shwnImg = getImage();
     }
 
     private void createImageDeck(){
@@ -55,7 +53,12 @@ public class ImgDeck {
      * returns an ImageView by getting it from a ShownImage object.
      */
     public ImageView getImage(){
-        return shwnImg.getImgView();
+        shwnImg = new ImageView(imageDeck[index].getImage());
+        shwnImg.setPreserveRatio(true);
+        shwnImg.setFitHeight(this.imgHeight);
+        shwnImg.setFitWidth(this.imgWidth);
+
+        return shwnImg;
     }
 
     /*
@@ -76,12 +79,7 @@ public class ImgDeck {
         imageDeck[index].setFitWidth(imageDeckHeight + imageDeckEmphasis);
         imageDeck[index].setFitHeight(imageDeckHeight + imageDeckEmphasis);
 
-        shwnImg = new ShownImage(fPath + "\\" + imagePaths[index]);
-
-        shwnImg.updateHeight(this.imgHeight);
-        shwnImg.updateWidth(this.imgWidth);
-
-        return shwnImg.getImgView();
+        return getImage();
     }
 
     /*
@@ -101,29 +99,18 @@ public class ImgDeck {
         imageDeck[index].setFitWidth(imageDeckHeight + imageDeckEmphasis);
         imageDeck[index].setFitHeight(imageDeckHeight + imageDeckEmphasis);
 
-        shwnImg = new ShownImage(fPath + "\\" + imagePaths[index]);
-
-        shwnImg.updateHeight(this.imgHeight);
-        shwnImg.updateWidth(this.imgWidth);
-
-        return shwnImg.getImgView();
+        return getImage();
     }
 
     /*
      * updates the shown image's width
      */
-    public void updateWidth(double width){
-        this.imgWidth = width;
-        shwnImg.updateWidth(imgWidth);
-    }
+    public void updateWidth(double width){ this.imgWidth = width; }
 
     /*
      * updates the shown image's height
      */
-    public void updateHeight(double height){
-        this.imgHeight = height - imageDeckHeight - imageDeckEmphasis;
-        shwnImg.updateHeight(imgHeight);
-    }
+    public void updateHeight(double height){ this.imgHeight = height - imageDeckHeight - imageDeckEmphasis; }
 
 
 }
