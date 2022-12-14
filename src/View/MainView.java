@@ -4,10 +4,12 @@ import Colours.ThemeControl;
 import Controller.Controller;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -22,19 +24,16 @@ public class MainView {
     Scene scene;
 
     ImageView imgV;
+    ImageView[] bottomPreviews;
 
     public MainView(Stage stage) {
         this.stage = stage;
         control = new Controller();
-
-        imgV = control.getImage(950,650);
+        bottomPreviews = control.getImageDeck();
 
         themeCont = control.getThemeCont();
 
-
-
         initUI();
-
     }
     private void initUI(){
         // Next image button and its event handler
@@ -42,7 +41,7 @@ public class MainView {
         nextButton.setId("Next");
         nextButton.setPrefSize(40,40);
         nextButton.setFont(new Font(18));
-        nextButton.setStyle("-fx-background-color:#121212; -fx-text-fill: #ffffff;");
+        nextButton.setStyle("-fx-background-color:#121212; -fx-text-fill: #ffffff;"); // TODO Need to update this so it gets the colour from theme control
         nextButton.setAlignment(Pos.CENTER);
 
         nextButton.setOnAction(e -> {
@@ -59,7 +58,7 @@ public class MainView {
         prevButton.setId("Previous");
         prevButton.setPrefSize(40,40);
         prevButton.setFont(new Font(18));
-        prevButton.setStyle("-fx-background-color:#121212; -fx-text-fill: #ffffff;");
+        prevButton.setStyle("-fx-background-color:#121212; -fx-text-fill: #ffffff;"); // TODO Need to update this so it gets the colour from theme control
         prevButton.setAlignment(Pos.CENTER);
 
         prevButton.setOnAction(e-> {
@@ -78,12 +77,18 @@ public class MainView {
         rightButtons.setAlignment(Pos.CENTER);
 
 
+
+
         bPane = new BorderPane();
         bPane.setStyle(themeCont.getBackColour());
 
-        bPane.setCenter(imgV);
+
         bPane.setRight(rightButtons);
         bPane.setLeft(leftButtons);
+        bPane.setBottom(createBottomPreview());
+
+        imgV = control.getImage(950 - bPane.getRight().getLayoutBounds().getWidth() - bPane.getLeft().getLayoutBounds().getWidth(),650-bPane.getBottom().getLayoutBounds().getHeight());
+        bPane.setCenter(imgV);
 
         scene = new Scene(bPane, 950, 650);
 
@@ -105,5 +110,18 @@ public class MainView {
 
         stage.setScene(scene);
         stage.show();
+    }
+
+    private HBox createBottomPreview(){
+        HBox out = new HBox(2);
+        //out.setSpacing(10);
+        for (ImageView bottomPreview : bottomPreviews) {
+            if (bottomPreview != null) {
+                out.getChildren().add(bottomPreview);
+            }
+        }
+        out.setAlignment(Pos.CENTER);
+        out.setPadding(new Insets(15,15,15,15));
+        return out;
     }
 }
