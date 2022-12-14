@@ -46,8 +46,8 @@ public class MainView {
 
         Button prevButton = new Button("<");
         prevButton.setId("Previous");
-        prevButton.setPrefSize(100,40);
-        prevButton.setFont(new Font(22));
+        prevButton.setPrefSize(40,40);
+        prevButton.setFont(new Font(18));
         prevButton.setStyle("-fx-background-color:#121212; -fx-text-fill: #ffffff;");
         prevButton.setAlignment(Pos.CENTER);
 
