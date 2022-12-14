@@ -91,10 +91,12 @@ public class MainView {
         bPane.setLeft(leftButtons);
         bPane.setBottom(createBottomPreview());
 
-        imgV = control.getImage(950 - bPane.getRight().getLayoutBounds().getWidth() - bPane.getLeft().getLayoutBounds().getWidth(),650-bPane.getBottom().getLayoutBounds().getHeight());
+        control.setSceneWidth(bPane.getBottom().getLayoutBounds().getWidth());
+        control.setSceneHeight(650-bPane.getBottom().getLayoutBounds().getHeight());
+        imgV = control.getImage();
         bPane.setCenter(imgV);
 
-        scene = new Scene(bPane, 950, 650);
+        scene = new Scene(bPane, 1200, 650);
 
         // got following listeners from: https://blog.idrsolutions.com/2012/11/adding-a-window-resize-listener-to-javafx-scene/
         scene.widthProperty().addListener(new ChangeListener<Number>() {
