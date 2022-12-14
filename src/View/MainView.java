@@ -36,7 +36,8 @@ public class MainView {
         initUI();
 
     }
-    private void initUI(){ //maybe have starting image file path passed in here
+    private void initUI(){
+        // Next image button and its event handler
         Button nextButton = new Button(">");
         nextButton.setId("Next");
         nextButton.setPrefSize(40,40);
@@ -45,6 +46,7 @@ public class MainView {
         nextButton.setAlignment(Pos.CENTER);
 
         nextButton.setOnAction(e -> {
+            // need to adjust width of the next image so it fits in the scene
             double newWidth = scene.getWidth() - bPane.getRight().getLayoutBounds().getWidth() - bPane.getLeft().getLayoutBounds().getWidth();
             control.setSceneWidth(newWidth);
 
@@ -52,7 +54,7 @@ public class MainView {
             bPane.setCenter(imgV);
         });
 
-
+        // Previous button and its event handler
         Button prevButton = new Button("<");
         prevButton.setId("Previous");
         prevButton.setPrefSize(40,40);
@@ -61,6 +63,7 @@ public class MainView {
         prevButton.setAlignment(Pos.CENTER);
 
         prevButton.setOnAction(e-> {
+            // need to adjust width of the next image so it fits in the scene
             double newWidth = scene.getWidth() - bPane.getRight().getLayoutBounds().getWidth() - bPane.getLeft().getLayoutBounds().getWidth();
             control.setSceneWidth(newWidth);
 
