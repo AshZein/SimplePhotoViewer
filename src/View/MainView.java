@@ -54,6 +54,7 @@ public class MainView {
 
             imgV = control.nextImage();
             bPane.setCenter(imgV);
+            stage.setTitle(imgV.getId());
             bPane.requestFocus();
         });
 
@@ -72,6 +73,7 @@ public class MainView {
 
             imgV = control.previousImage();
             bPane.setCenter(imgV);
+            stage.setTitle(imgV.getId());
             bPane.requestFocus();
         });
 
@@ -127,10 +129,11 @@ public class MainView {
                     imgV = control.nextImage();
                     bPane.setCenter(imgV);
                 }
+                stage.setTitle(imgV.getId());
                 bPane.requestFocus();
             }
         });
-
+        stage.setTitle(imgV.getId());
         stage.setScene(scene);
         stage.show();
     }
