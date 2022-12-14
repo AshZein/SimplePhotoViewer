@@ -33,6 +33,28 @@ public class MainView {
 
     }
     private void initUI(){ //maybe have starting image file path passed in here
+        Button nextButton = new Button(">");
+        nextButton.setId("Next");
+        nextButton.setPrefSize(100,40);
+        nextButton.setFont(new Font(22));
+        nextButton.setStyle("-fx-background-color:#121212; -fx-text-fill: #ffffff;");
+        nextButton.setAlignment(Pos.CENTER);
+
+        Button prevButton = new Button("<");
+        prevButton.setId("Previous");
+        prevButton.setPrefSize(100,40);
+        prevButton.setFont(new Font(22));
+        prevButton.setStyle("-fx-background-color:#121212; -fx-text-fill: #ffffff;");
+        prevButton.setAlignment(Pos.CENTER);
+
+
+        VBox leftButtons = new VBox(prevButton);
+        leftButtons.setAlignment(Pos.CENTER);
+
+        VBox rightButtons = new VBox(nextButton);
+        rightButtons.setAlignment(Pos.CENTER);
+
+
         bPane = new BorderPane();
         bPane.setStyle(themeCont.getBackColour());
 
