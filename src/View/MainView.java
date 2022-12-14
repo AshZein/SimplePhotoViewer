@@ -60,6 +60,13 @@ public class MainView {
         prevButton.setStyle("-fx-background-color:#121212; -fx-text-fill: #ffffff;");
         prevButton.setAlignment(Pos.CENTER);
 
+        prevButton.setOnAction(e-> {
+            double newWidth = scene.getWidth() - bPane.getRight().getLayoutBounds().getWidth() - bPane.getLeft().getLayoutBounds().getWidth();
+            control.setSceneWidth(newWidth);
+
+            imgV = control.previousImage();
+            bPane.setCenter(imgV);
+        });
 
         VBox leftButtons = new VBox(prevButton);
         leftButtons.setAlignment(Pos.CENTER);
