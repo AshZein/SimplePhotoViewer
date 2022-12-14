@@ -21,20 +21,20 @@ public class Controller {
     }
 
     public void setSceneWidth(double width){
-        this.picture.updateWidth(width);
+        imgD.updateWidth(width);
     }
     public void setSceneHeight(double height){
-        this.picture.updateHeight(height);
+        imgD.updateHeight(height);
     }
 
     public ImageView getImage(double width, double height){
-        this.picture.updateHeight(height);
-        this.picture.updateWidth(width);
+        imgD.updateHeight(height);
+        imgD.updateWidth(width);
 
-        return picture.getImgView();
+        return imgD.getImage();
     }
 
     public ImageView getImage(){
-        return picture.getImgView();
+        return imgD.getImage();
     }
 }
