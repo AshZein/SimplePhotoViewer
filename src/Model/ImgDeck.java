@@ -28,7 +28,7 @@ public class ImgDeck {
         assert imagePaths != null;
         shwnImg = new ShownImage(fPath + "\\" + imagePaths[index]); //first image in the folder
 
-        this.imageDeck = new ImageView[5];
+        this.imageDeck = new ImageView[20];
         createImageDeck();
     }
 
