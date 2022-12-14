@@ -59,11 +59,4 @@ public class MainView {
         stage.setScene(scene);
         stage.show();
     }
-
-    public void setImage(ImageView imgV){
-        this.imgV = imgV;
-    }
-    public BorderPane getbPane(){
-        return this.bPane;
-    }
 }
