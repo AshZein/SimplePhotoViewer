@@ -20,13 +20,22 @@ public class Controller {
         return this.themeCont;
     }
 
+    /*
+     * Updates the width of the current ImageView
+     */
     public void setSceneWidth(double width){
         imgD.updateWidth(width);
     }
+    /*
+     * Updates the height of the current ImageView
+     */
     public void setSceneHeight(double height){
         imgD.updateHeight(height);
     }
 
+    /*
+     * Gets an imageView with the given width and height from an ImageDeck object
+     */
     public ImageView getImage(double width, double height){
         imgD.updateHeight(height);
         imgD.updateWidth(width);
@@ -34,12 +43,23 @@ public class Controller {
         return imgD.getImage();
     }
 
+    /*
+     * Gets an imageView from an ImageDeck object
+     */
     public ImageView getImage(){
         return imgD.getImage();
     }
+
+    /*
+     * Gets the next imageView from an ImageDeck object
+     */
     public ImageView nextImage(){
         return imgD.getNext();
     }
+
+    /*
+     * Gets the previous imageView from an ImageDeck object
+     */
     public ImageView previousImage(){
         return imgD.getPrevious();
     }
