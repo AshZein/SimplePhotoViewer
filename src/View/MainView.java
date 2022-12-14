@@ -44,6 +44,15 @@ public class MainView {
         nextButton.setStyle("-fx-background-color:#121212; -fx-text-fill: #ffffff;");
         nextButton.setAlignment(Pos.CENTER);
 
+        nextButton.setOnAction(e -> {
+            double newWidth = scene.getWidth() - bPane.getRight().getLayoutBounds().getWidth() - bPane.getLeft().getLayoutBounds().getWidth();
+            control.setSceneWidth(newWidth);
+
+            imgV = control.nextImage();
+            bPane.setCenter(imgV);
+        });
+
+
         Button prevButton = new Button("<");
         prevButton.setId("Previous");
         prevButton.setPrefSize(40,40);
