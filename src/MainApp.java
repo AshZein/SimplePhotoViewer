@@ -10,14 +10,13 @@ import javafx.stage.Stage;
 import java.util.Objects;
 
 public class MainApp extends Application{
-    Controller control;
     public static void main(String[] args){
         launch(args);
     }
 
     @Override
     public void start(Stage stage) throws Exception {
-        control = new Controller(stage);
+        MainView mainV = new MainView(stage);
     }
 
 }

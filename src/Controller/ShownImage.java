@@ -9,7 +9,6 @@ public class ShownImage {
     String currImgPath;
     Image currImg;
     ImageView currImgView;
-    Controller control;
 
     double sceneWidth;
     double sceneHeight;
@@ -30,9 +29,6 @@ public class ShownImage {
         currImgView = new ImageView(currImg);
 
         currImgView.setPreserveRatio(true);
-    }
-    public void setController(Controller control){
-        this.control = control;
     }
 
     public ImageView getImgView(){
