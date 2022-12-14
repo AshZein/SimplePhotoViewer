@@ -59,9 +59,11 @@ public class MainView {
         bPane.setStyle(themeCont.getBackColour());
 
         bPane.setCenter(imgV);
-
+        bPane.setRight(rightButtons);
+        bPane.setLeft(leftButtons);
 
         scene = new Scene(bPane, 950, 650);
+
         // got following listeners from: https://blog.idrsolutions.com/2012/11/adding-a-window-resize-listener-to-javafx-scene/
         scene.widthProperty().addListener(new ChangeListener<Number>() {
             @Override public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneWidth, Number newSceneWidth) {
