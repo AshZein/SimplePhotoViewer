@@ -42,7 +42,9 @@ public class ImgDeck {
                 curr.updateHeight(imageDeckHeight);
                 curr.updateWidth(imageDeckHeight);
             }
-            imageDeck[i] = curr.getImgView();
+            ImageView toSet = curr.getImgView();
+            toSet.setId(imagePaths[i]);
+            imageDeck[i] = toSet;
         }
     }
 
