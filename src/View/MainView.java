@@ -121,7 +121,7 @@ public class MainView {
             }
         }
         out.setAlignment(Pos.CENTER);
-        out.setPadding(new Insets(15,15,15,15));
+        out.setPadding(new Insets(5,5,5,5));
         return out;
     }
 }
