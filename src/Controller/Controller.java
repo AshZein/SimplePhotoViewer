@@ -1,18 +1,18 @@
 package Controller;
 
 import Colours.ThemeControl;
+import Model.ImgDeck;
 import Model.ShownImage;
 import javafx.scene.image.ImageView;
 
 public class Controller {
     ThemeControl themeCont;
-
-    ShownImage picture;
-    String imgPath = System.getProperty("user.dir") + "\\TestImages\\DSC_4236_01.jpg";
-
+    String imgFPath = System.getProperty("user.dir") + "\\TestImages";
+    ImgDeck imgD;
 
     public Controller(){
-        this.picture = new ShownImage(imgPath);
+        imgD = new ImgDeck(imgFPath);
+
         themeCont = new ThemeControl();
     }
 
