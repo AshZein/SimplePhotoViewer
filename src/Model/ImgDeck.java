@@ -35,7 +35,7 @@ public class ImgDeck {
         else{
             index++;
         }
-        shwnImg = new ShownImage(imagePaths[index]);
+        shwnImg = new ShownImage(fPath + "\\" + imagePaths[index]);
 
         shwnImg.updateHeight(this.imgHeight);
         shwnImg.updateWidth(this.imgWidth);
@@ -50,7 +50,7 @@ public class ImgDeck {
             index--;
         }
 
-        shwnImg = new ShownImage(imagePaths[index]);
+        shwnImg = new ShownImage(fPath + "\\" + imagePaths[index]);
 
         shwnImg.updateHeight(this.imgHeight);
         shwnImg.updateWidth(this.imgWidth);
