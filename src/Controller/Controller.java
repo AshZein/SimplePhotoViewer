@@ -1,6 +1,7 @@
 package Controller;
 
 import Colours.ThemeControl;
+import Model.ShownImage;
 import javafx.scene.image.ImageView;
 
 public class Controller {
