@@ -63,4 +63,6 @@ public class Controller {
     public ImageView previousImage(){
         return imgD.getPrevious();
     }
+
+    public ImageView[] getImageDeck(){ return imgD.getImageDeck(); }
 }
