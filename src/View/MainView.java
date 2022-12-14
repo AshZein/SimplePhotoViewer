@@ -4,6 +4,7 @@ import Colours.ThemeControl;
 import Controller.Controller;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -15,6 +16,8 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import javafx.scene.image.ImageView;
+
+import javafx.scene.input.KeyEvent;
 
 public class MainView {
     BorderPane bPane;
@@ -51,6 +54,7 @@ public class MainView {
 
             imgV = control.nextImage();
             bPane.setCenter(imgV);
+            bPane.requestFocus();
         });
 
         // Previous button and its event handler
@@ -68,6 +72,7 @@ public class MainView {
 
             imgV = control.previousImage();
             bPane.setCenter(imgV);
+            bPane.requestFocus();
         });
 
         VBox leftButtons = new VBox(prevButton);
@@ -75,9 +80,6 @@ public class MainView {
 
         VBox rightButtons = new VBox(nextButton);
         rightButtons.setAlignment(Pos.CENTER);
-
-
-
 
         bPane = new BorderPane();
         bPane.setStyle(themeCont.getBackColour());
@@ -105,6 +107,27 @@ public class MainView {
                 control.setSceneHeight(scene.getHeight());
 
                 imgV = control.getImage();
+            }
+        });
+        bPane.setOnKeyPressed(new EventHandler<KeyEvent>(){
+            public void handle(KeyEvent keyEvent){
+                String code = keyEvent.getCode().getName();
+                System.out.println(code);
+                if (code.equals("Left")){
+                    double newWidth = scene.getWidth() - bPane.getRight().getLayoutBounds().getWidth() - bPane.getLeft().getLayoutBounds().getWidth();
+                    control.setSceneWidth(newWidth);
+
+                    imgV = control.previousImage();
+                    bPane.setCenter(imgV);
+                }
+                else if(code.equals("Right")){
+                    double newWidth = scene.getWidth() - bPane.getRight().getLayoutBounds().getWidth() - bPane.getLeft().getLayoutBounds().getWidth();
+                    control.setSceneWidth(newWidth);
+
+                    imgV = control.nextImage();
+                    bPane.setCenter(imgV);
+                }
+                bPane.requestFocus();
             }
         });
 
