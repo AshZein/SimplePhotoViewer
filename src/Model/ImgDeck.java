@@ -25,6 +25,25 @@ public class ImgDeck {
         shwnImg = new ShownImage(fPath + "\\" + imagePaths[index]); //first image in the folder
     }
 
+    private void createImageDeck(){
+        for (int i = 0; i < imagePaths.length; i++){
+            ShownImage curr = new ShownImage(fPath + "\\" + imagePaths[i]);
+            if (i == index){
+                // The currently shown image should be emphasized in the bottom preview
+                curr.updateHeight(imageDeckHeight+imageDeckEmphasis);
+                curr.updateWidth(imageDeckHeight+imageDeckEmphasis);
+            }
+            else {
+                curr.updateHeight(imageDeckHeight);
+                curr.updateWidth(imageDeckHeight);
+            }
+            imageDeck[i] = curr.getImgView();
+        }
+    }
+
+    public ImageView[] getImageDeck(){
+        return this.imageDeck;
+    }
     /*
      * returns an ImageView by getting it from a ShownImage object.
      */
