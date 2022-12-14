@@ -1,18 +1,18 @@
 package Controller;
 
 import Colours.ThemeControl;
+import Model.ImgDeck;
 import Model.ShownImage;
 import javafx.scene.image.ImageView;
 
 public class Controller {
     ThemeControl themeCont;
-
-    ShownImage picture;
-    String imgPath = System.getProperty("user.dir") + "\\TestImages\\DSC_4236_01.jpg";
-
+    String imgFPath = System.getProperty("user.dir") + "\\TestImages";
+    ImgDeck imgD;
 
     public Controller(){
-        this.picture = new ShownImage(imgPath);
+        imgD = new ImgDeck(imgFPath);
+
         themeCont = new ThemeControl();
     }
 
@@ -20,21 +20,47 @@ public class Controller {
         return this.themeCont;
     }
 
+    /*
+     * Updates the width of the current ImageView
+     */
     public void setSceneWidth(double width){
-        this.picture.updateWidth(width);
+        imgD.updateWidth(width);
     }
+    /*
+     * Updates the height of the current ImageView
+     */
     public void setSceneHeight(double height){
-        this.picture.updateHeight(height);
+        imgD.updateHeight(height);
     }
 
+    /*
+     * Gets an imageView with the given width and height from an ImageDeck object
+     */
     public ImageView getImage(double width, double height){
-        this.picture.updateHeight(height);
-        this.picture.updateWidth(width);
+        imgD.updateHeight(height);
+        imgD.updateWidth(width);
 
-        return picture.getImgView();
+        return imgD.getImage();
     }
 
+    /*
+     * Gets an imageView from an ImageDeck object
+     */
     public ImageView getImage(){
-        return picture.getImgView();
+        return imgD.getImage();
+    }
+
+    /*
+     * Gets the next imageView from an ImageDeck object
+     */
+    public ImageView nextImage(){
+        return imgD.getNext();
+    }
+
+    /*
+     * Gets the previous imageView from an ImageDeck object
+     */
+    public ImageView previousImage(){
+        return imgD.getPrevious();
     }
 }
