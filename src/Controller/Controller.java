@@ -4,6 +4,7 @@ import Colours.ThemeControl;
 import Model.ImgDeck;
 import Model.ShownImage;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 
 public class Controller {
     ThemeControl themeCont;
@@ -64,5 +65,5 @@ public class Controller {
         return imgD.getPrevious();
     }
 
-    public ImageView[] getImageDeck(){ return imgD.getImageDeck(); }
+    public HBox getImageDeck(){ return imgD.getImageDeck(); }
 }
