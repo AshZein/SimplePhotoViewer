@@ -8,6 +8,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -19,6 +20,8 @@ import javafx.scene.image.ImageView;
 
 import javafx.scene.input.KeyEvent;
 
+import javafx.scene.canvas.Canvas;
+
 public class MainView {
     BorderPane bPane;
     ThemeControl themeCont;
@@ -28,6 +31,10 @@ public class MainView {
 
     ImageView imgV;
     ImageView[] bottomPreviews;
+
+    double bPaneRWidth;
+    double bPaneLWidth;
+    double bPaneBottomHeight;
 
     public MainView(Stage stage) {
         this.stage = stage;
@@ -48,10 +55,6 @@ public class MainView {
         nextButton.setAlignment(Pos.CENTER);
 
         nextButton.setOnAction(e -> {
-            // need to adjust width of the next image so it fits in the scene
-            double newWidth = scene.getWidth() - bPane.getRight().getLayoutBounds().getWidth() - bPane.getLeft().getLayoutBounds().getWidth();
-            control.setSceneWidth(newWidth);
-
             imgV = control.nextImage();
             bPane.setCenter(imgV);
             stage.setTitle(imgV.getId());
@@ -67,10 +70,6 @@ public class MainView {
         prevButton.setAlignment(Pos.CENTER);
 
         prevButton.setOnAction(e-> {
-            // need to adjust width of the next image so it fits in the scene
-            double newWidth = scene.getWidth() - bPane.getRight().getLayoutBounds().getWidth() - bPane.getLeft().getLayoutBounds().getWidth();
-            control.setSceneWidth(newWidth);
-
             imgV = control.previousImage();
             bPane.setCenter(imgV);
             stage.setTitle(imgV.getId());
@@ -91,6 +90,10 @@ public class MainView {
         bPane.setLeft(leftButtons);
         bPane.setBottom(createBottomPreview());
 
+        bPaneRWidth = bPane.getRight().getLayoutBounds().getWidth();
+        bPaneLWidth = bPane.getLeft().getLayoutBounds().getWidth();
+        bPaneBottomHeight = bPane.getBottom().getLayoutBounds().getHeight();
+
         control.setSceneWidth(bPane.getBottom().getLayoutBounds().getWidth());
         control.setSceneHeight(650-bPane.getBottom().getLayoutBounds().getHeight());
         imgV = control.getImage();
@@ -101,16 +104,18 @@ public class MainView {
         // got following listeners from: https://blog.idrsolutions.com/2012/11/adding-a-window-resize-listener-to-javafx-scene/
         scene.widthProperty().addListener(new ChangeListener<Number>() {
             @Override public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneWidth, Number newSceneWidth) {
-                control.setSceneWidth(scene.getWidth() - bPane.getRight().getLayoutBounds().getWidth() - bPane.getLeft().getLayoutBounds().getWidth());
+                double adjustment = scene.getWidth() - bPaneRWidth - bPaneLWidth;
+                control.setSceneWidth(adjustment);
 
-                imgV = control.getImage();
+                imgV.setFitWidth(adjustment);
             }
         });
         scene.heightProperty().addListener(new ChangeListener<Number>() {
             @Override public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneHeight, Number newSceneHeight) {
-                control.setSceneHeight(scene.getHeight());
+                double adjustment = scene.getHeight() - bPaneBottomHeight;
+                control.setSceneHeight(adjustment);
 
-                imgV = control.getImage();
+                imgV.setFitHeight(adjustment);
             }
         });
         bPane.setOnKeyPressed(new EventHandler<KeyEvent>(){
@@ -118,16 +123,10 @@ public class MainView {
                 String code = keyEvent.getCode().getName();
                 System.out.println(code);
                 if (code.equals("Left")){
-                    double newWidth = scene.getWidth() - bPane.getRight().getLayoutBounds().getWidth() - bPane.getLeft().getLayoutBounds().getWidth();
-                    control.setSceneWidth(newWidth);
-
                     imgV = control.previousImage();
                     bPane.setCenter(imgV);
                 }
                 else if(code.equals("Right")){
-                    double newWidth = scene.getWidth() - bPane.getRight().getLayoutBounds().getWidth() - bPane.getLeft().getLayoutBounds().getWidth();
-                    control.setSceneWidth(newWidth);
-
                     imgV = control.nextImage();
                     bPane.setCenter(imgV);
                 }

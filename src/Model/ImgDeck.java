@@ -43,6 +43,8 @@ public class ImgDeck {
                 curr.updateWidth(imageDeckHeight);
             }
             ImageView toSet = curr.getImgView();
+            toSet.setSmooth(false);
+            toSet.setCache(true);
             toSet.setId(imagePaths[i]);
             imageDeck[i] = toSet;
         }
@@ -56,6 +58,8 @@ public class ImgDeck {
      */
     public ImageView getImage(){
         shwnImg = new ImageView(imageDeck[index].getImage());
+        shwnImg.setCache(true);
+        shwnImg.setSmooth(false);
         shwnImg.setId(imageDeck[index].getId());
         shwnImg.setPreserveRatio(true);
         shwnImg.setFitHeight(this.imgHeight);
@@ -72,11 +76,11 @@ public class ImgDeck {
         imageDeck[index].setFitWidth(imageDeckHeight);
         imageDeck[index].setFitHeight(imageDeckHeight);
 
-        if(index + 1 == imagePaths.length){
-            index = 0;
+        if(index + 1 != imagePaths.length){
+            index++;
         }
         else{
-            index++;
+            index = 0;
         }
         // emphasizing new image
         imageDeck[index].setFitWidth(imageDeckHeight + imageDeckEmphasis);
