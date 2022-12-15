@@ -95,7 +95,7 @@ public class MainView {
         bPaneBottomHeight = bPane.getBottom().getLayoutBounds().getHeight();
 
         control.setSceneWidth(bPane.getBottom().getLayoutBounds().getWidth());
-        control.setSceneHeight(650-bPane.getBottom().getLayoutBounds().getHeight());
+        control.setSceneHeight(650-bPaneBottomHeight);
         imgV = control.getImage();
         bPane.setCenter(imgV);
 

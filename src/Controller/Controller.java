@@ -7,7 +7,7 @@ import javafx.scene.image.ImageView;
 
 public class Controller {
     ThemeControl themeCont;
-    String imgFPath = System.getProperty("user.dir") + "\\TestImages";
+    String imgFPath = System.getProperty("user.dir") + "\\TestImagesSmall";
     ImgDeck imgD;
 
     public Controller(){
