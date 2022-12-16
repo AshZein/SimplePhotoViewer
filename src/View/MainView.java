@@ -93,17 +93,22 @@ public class MainView {
             public void handle(KeyEvent keyEvent){
                 String code = keyEvent.getCode().getName();
                 System.out.println(code);
+                boolean changed = false;
                 if (code.equals("Left")){
                     imgV = control.previousImage();
                     bPane.setCenter(imgV);
+                    changed = true;
                 }
                 else if(code.equals("Right")){
                     imgV = control.nextImage();
                     bPane.setCenter(imgV);
+                    changed = true;
                 }
-                bPane.setBottom(control.getImageDeck());
-                stage.setTitle(imgV.getId());
-                bPane.requestFocus();
+                if(changed) {
+                    bPane.setBottom(control.getImageDeck());
+                    stage.setTitle(imgV.getId());
+                    bPane.requestFocus();
+                }
             }
         });
 
