@@ -40,6 +40,10 @@ public class ShownImage {
         return imgView;
     }
 
+    public Image getImage(){
+        return currImg;
+    }
+
 
     public void updateWidth(double width){
         sceneWidth = width;
