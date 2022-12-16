@@ -87,26 +87,7 @@ public class MainView {
         bPane.setStyle(themeCont.getBackColour());
 
 
-        bPane.setOnKeyPressed(new EventHandler<KeyEvent>(){
-            public void handle(KeyEvent keyEvent){
-                String code = keyEvent.getCode().getName();
-                boolean changed = false;
-                if (code.equals("Left")){
-                    imgV = control.previousImage();
-                    bPane.setCenter(imgV);
-                    changed = true;
-                }
-                else if(code.equals("Right")){
-                    imgV = control.nextImage();
-                    bPane.setCenter(imgV);
-                    changed = true;
-                }
-                if(changed) {
-                    stage.setTitle(imgV.getId());
-                    bPane.requestFocus();
-                }
-            }
-        });
+
 
         bPane.setRight(rightButtons);
         bPane.setLeft(leftButtons);
@@ -142,6 +123,24 @@ public class MainView {
             }
         });
 
+        scene.addEventFilter(KeyEvent.KEY_PRESSED, e->{
+                String code = e.getCode().getName();
+                boolean changed = false;
+                if (code.equals("Left")){
+                    imgV = control.previousImage();
+                    bPane.setCenter(imgV);
+                    changed = true;
+                }
+                else if(code.equals("Right")){
+                    imgV = control.nextImage();
+                    bPane.setCenter(imgV);
+                    changed = true;
+                }
+                if(changed) {
+                    stage.setTitle(imgV.getId());
+                    bPane.requestFocus();
+                }
+        });
         stage.setTitle(imgV.getId());
         stage.setScene(scene);
         stage.show();
