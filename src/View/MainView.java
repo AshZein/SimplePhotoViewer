@@ -5,10 +5,8 @@ import Controller.Controller;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -20,7 +18,6 @@ import javafx.scene.image.ImageView;
 
 import javafx.scene.input.KeyEvent;
 
-import javafx.scene.canvas.Canvas;
 
 public class MainView {
     BorderPane bPane;
@@ -60,8 +57,6 @@ public class MainView {
         nextButton.setOnAction(e -> {
             imgV = control.nextImage();
             bPane.setCenter(imgV);
-            stage.setTitle(imgV.getId());
-            bPane.setBottom(control.getImageDeck());
             bPane.requestFocus();
         });
 
@@ -77,7 +72,6 @@ public class MainView {
             imgV = control.previousImage();
             bPane.setCenter(imgV);
             stage.setTitle(imgV.getId());
-            bPane.setBottom(control.getImageDeck());
             bPane.requestFocus();
         });
 
@@ -108,7 +102,6 @@ public class MainView {
                     changed = true;
                 }
                 if(changed) {
-                    bPane.setBottom(control.getImageDeck());
                     stage.setTitle(imgV.getId());
                     bPane.requestFocus();
                 }

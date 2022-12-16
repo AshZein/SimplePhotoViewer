@@ -1,8 +1,8 @@
 package Model;
 
-import Model.ShownImage;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
@@ -42,22 +42,20 @@ public class ImgDeck {
     private void createImageDeck(){
         imageDeck = new HBox();
         for (int i = 0; i < imagePaths.length; i++){
-            ShownImage curr = new ShownImage(fPath + "\\" + imagePaths[i]);
+            Image image = new Image(fPath + "\\" + imagePaths[i], imageDeckHeight, imageDeckHeight, true, false);
+            ImagePreview curr;
             if (i == index){
                 // The currently shown image should be emphasized in the bottom preview
-                curr.updateHeight(imageDeckHeight+imageDeckEmphasis);
-                curr.updateWidth(imageDeckHeight+imageDeckEmphasis);
+                image = new Image(fPath + "\\" + imagePaths[i], imageDeckHeight + imageDeckEmphasis, imageDeckHeight + imageDeckEmphasis, true, false);
+                curr = new ImagePreview(image, imageDeckHeight + imageDeckEmphasis);
+                curr.updateDimension(imageDeckHeight + imageDeckEmphasis);
             }
             else {
-                curr.updateHeight(imageDeckHeight);
-                curr.updateWidth(imageDeckHeight);
+                curr = new ImagePreview(image, imageDeckHeight);
             }
-            ImageView toSet = curr.getImgView();
-            toSet.setSmooth(false);
-            toSet.setCache(true);
-            toSet.setId(imagePaths[i]);
-            imageDeck.getChildren().add(toSet);
+            imageDeck.getChildren().add(curr.getCanvas());
         }
+        imageDeck.setMaxHeight(imageDeckHeight + imageDeckEmphasis);
         imageDeck.setAlignment(Pos.CENTER);
         imageDeck.setPadding(new Insets(5,5,5,5));
     }
@@ -81,6 +79,8 @@ public class ImgDeck {
      * gets the next image in the array of file paths, circles back to the beginning once at the end of array
      */
     public ImageView getNext(){
+        updatePreview(index, imageDeckHeight);
+
         if(index + 1 == imagePaths.length){
             index = 0;
         }
@@ -100,12 +100,12 @@ public class ImgDeck {
         else{
             nextImg = new ShownImage(fPath + "\\" + imagePaths[index+1]);
         }
+        updatePreview(index, imageDeckHeight + imageDeckEmphasis);
+
         nextImg.updateHeight(imgHeight);
         nextImg.updateWidth(imgWidth);
 
         shwnImg = out;
-
-        createImageDeck();
 
         return out.getImgView();
     }
@@ -114,6 +114,7 @@ public class ImgDeck {
      * gets the previous image in the array of file paths, circles back to the end once at the start of the array
      */
     public ImageView getPrevious(){
+        updatePreview(index, imageDeckHeight);
         if (index - 1 < 0){
             index = imagePaths.length - 1;
         }
@@ -133,14 +134,19 @@ public class ImgDeck {
         else {
             prevImg = new ShownImage(fPath + "\\" + imagePaths[index - 1]);
         }
+        updatePreview(index, imageDeckHeight + imageDeckEmphasis);
+
         prevImg.updateWidth(imgWidth);
         prevImg.updateHeight(imgHeight);
 
         shwnImg = out;
 
-        createImageDeck();
-
         return out.getImgView();
+    }
+
+    private void updatePreview(int index, double size){
+        ImagePreview replacement = new ImagePreview(new Image(fPath + "\\" + imagePaths[index], size, size, true, false), size);
+        imageDeck.getChildren().set(index, replacement.getCanvas());
     }
 
     /*
