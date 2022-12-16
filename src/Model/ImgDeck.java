@@ -1,6 +1,5 @@
 package Model;
 
-import Model.ShownImage;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.image.Image;
