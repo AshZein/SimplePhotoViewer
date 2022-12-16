@@ -8,7 +8,6 @@ public class ShownImage {
 
     String currImgPath;
     Image currImg;
-    ImageView currImgView;
 
     double sceneWidth;
     double sceneHeight;
@@ -18,27 +17,31 @@ public class ShownImage {
         this.currImgPath = initialPath;
 
         this.currImg = new Image(currImgPath);
-        currImgView = new ImageView(currImg);
+        //currImgView = new ImageView(currImg);
 
-        currImgView.setPreserveRatio(true);
+        //currImgView.setPreserveRatio(true);
     }
     public ShownImage(){
         this.currImgPath = System.getProperty("user.dir") + "\\TestImages\\DSC_4236_01.jpg"; // gets the project directory then appends the test image location
 
         this.currImg = new Image(currImgPath);
-        currImgView = new ImageView(currImg);
-
-        currImgView.setPreserveRatio(true);
     }
 
     public ImageView getImgView(){
-        fitToScreen();
-        return currImgView;
+        ImageView imgView = new ImageView(currImg);
+
+        return fitToScreen(imgView);
     }
 
-    private void fitToScreen(){
-        this.currImgView.setFitHeight(sceneHeight);
-        this.currImgView.setFitWidth(sceneWidth);
+    private ImageView fitToScreen(ImageView imgView){
+        imgView.setPreserveRatio(true);
+        imgView.setFitHeight(sceneHeight);
+        imgView.setFitWidth(sceneWidth);
+        return imgView;
+    }
+
+    public Image getImage(){
+        return currImg;
     }
 
 

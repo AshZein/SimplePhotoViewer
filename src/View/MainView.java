@@ -30,16 +30,19 @@ public class MainView {
     Scene scene;
 
     ImageView imgV;
-    ImageView[] bottomPreviews;
+    HBox bottomPreview;
 
     double bPaneRWidth;
     double bPaneLWidth;
     double bPaneBottomHeight;
 
+    double sceneWidth = 1200;
+    double sceneHeight = 650;
+
     public MainView(Stage stage) {
         this.stage = stage;
         control = new Controller();
-        bottomPreviews = control.getImageDeck();
+        bottomPreview = control.getImageDeck();
 
         themeCont = control.getThemeCont();
 
@@ -58,6 +61,7 @@ public class MainView {
             imgV = control.nextImage();
             bPane.setCenter(imgV);
             stage.setTitle(imgV.getId());
+            bPane.setBottom(control.getImageDeck());
             bPane.requestFocus();
         });
 
@@ -73,6 +77,7 @@ public class MainView {
             imgV = control.previousImage();
             bPane.setCenter(imgV);
             stage.setTitle(imgV.getId());
+            bPane.setBottom(control.getImageDeck());
             bPane.requestFocus();
         });
 
@@ -83,12 +88,37 @@ public class MainView {
         rightButtons.setAlignment(Pos.CENTER);
 
         bPane = new BorderPane();
+
         bPane.setStyle(themeCont.getBackColour());
 
 
+        bPane.setOnKeyPressed(new EventHandler<KeyEvent>(){
+            public void handle(KeyEvent keyEvent){
+                String code = keyEvent.getCode().getName();
+                System.out.println(code);
+                boolean changed = false;
+                if (code.equals("Left")){
+                    imgV = control.previousImage();
+                    bPane.setCenter(imgV);
+                    changed = true;
+                }
+                else if(code.equals("Right")){
+                    imgV = control.nextImage();
+                    bPane.setCenter(imgV);
+                    changed = true;
+                }
+                if(changed) {
+                    bPane.setBottom(control.getImageDeck());
+                    stage.setTitle(imgV.getId());
+                    bPane.requestFocus();
+                }
+            }
+        });
+
         bPane.setRight(rightButtons);
         bPane.setLeft(leftButtons);
-        bPane.setBottom(createBottomPreview());
+        bPane.setBottom(bottomPreview);
+        bPane.requestFocus();
 
         bPaneRWidth = bPane.getRight().getLayoutBounds().getWidth();
         bPaneLWidth = bPane.getLeft().getLayoutBounds().getWidth();
@@ -99,7 +129,7 @@ public class MainView {
         imgV = control.getImage();
         bPane.setCenter(imgV);
 
-        scene = new Scene(bPane, 1200, 650);
+        scene = new Scene(bPane, sceneWidth, sceneHeight);
 
         // got following listeners from: https://blog.idrsolutions.com/2012/11/adding-a-window-resize-listener-to-javafx-scene/
         scene.widthProperty().addListener(new ChangeListener<Number>() {
@@ -118,37 +148,10 @@ public class MainView {
                 imgV.setFitHeight(adjustment);
             }
         });
-        bPane.setOnKeyPressed(new EventHandler<KeyEvent>(){
-            public void handle(KeyEvent keyEvent){
-                String code = keyEvent.getCode().getName();
-                System.out.println(code);
-                if (code.equals("Left")){
-                    imgV = control.previousImage();
-                    bPane.setCenter(imgV);
-                }
-                else if(code.equals("Right")){
-                    imgV = control.nextImage();
-                    bPane.setCenter(imgV);
-                }
-                stage.setTitle(imgV.getId());
-                bPane.requestFocus();
-            }
-        });
+
         stage.setTitle(imgV.getId());
         stage.setScene(scene);
         stage.show();
     }
 
-    private HBox createBottomPreview(){
-        HBox out = new HBox(2);
-        //out.setSpacing(10);
-        for (ImageView bottomPreview : bottomPreviews) {
-            if (bottomPreview != null) {
-                out.getChildren().add(bottomPreview);
-            }
-        }
-        out.setAlignment(Pos.CENTER);
-        out.setPadding(new Insets(5,5,5,5));
-        return out;
-    }
 }

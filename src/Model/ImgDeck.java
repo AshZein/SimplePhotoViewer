@@ -1,7 +1,10 @@
 package Model;
 
 import Model.ShownImage;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 
 import java.io.File;
 
@@ -13,8 +16,10 @@ public class ImgDeck {
     double imageDeckHeight = 50;
     double imageDeckEmphasis = 30;
     String[] imagePaths;
-    ImageView shwnImg;
-    ImageView[] imageDeck;
+    ShownImage shwnImg;
+    ShownImage nextImg;
+    ShownImage prevImg;
+    HBox imageDeck;
     int index;
 
     public ImgDeck(String folderPath){
@@ -25,12 +30,17 @@ public class ImgDeck {
         imagePaths = f.list(); // listing all the files in the folder
         index = 0;
 
-        this.imageDeck = new ImageView[20];
+        assert imagePaths != null;
+        if(imagePaths.length > 2){
+            nextImg = new ShownImage(fPath + "\\" + imagePaths[index + 1]);
+            prevImg = new ShownImage(fPath + "\\" + imagePaths[imagePaths.length - 1]);
+        }
         createImageDeck();
-        shwnImg = getImage();
+        shwnImg = new ShownImage(fPath + "\\" + imagePaths[index]);
     }
 
     private void createImageDeck(){
+        imageDeck = new HBox();
         for (int i = 0; i < imagePaths.length; i++){
             ShownImage curr = new ShownImage(fPath + "\\" + imagePaths[i]);
             if (i == index){
@@ -46,67 +56,91 @@ public class ImgDeck {
             toSet.setSmooth(false);
             toSet.setCache(true);
             toSet.setId(imagePaths[i]);
-            imageDeck[i] = toSet;
+            imageDeck.getChildren().add(toSet);
         }
+        imageDeck.setAlignment(Pos.CENTER);
+        imageDeck.setPadding(new Insets(5,5,5,5));
     }
 
-    public ImageView[] getImageDeck(){
+    public HBox getImageDeck(){
         return this.imageDeck;
     }
     /*
      * returns an ImageView by getting it from a ShownImage object.
      */
     public ImageView getImage(){
-        shwnImg = new ImageView(imageDeck[index].getImage());
-        shwnImg.setCache(true);
-        shwnImg.setSmooth(false);
-        shwnImg.setId(imageDeck[index].getId());
-        shwnImg.setPreserveRatio(true);
-        shwnImg.setFitHeight(this.imgHeight);
-        shwnImg.setFitWidth(this.imgWidth);
+        shwnImg.updateWidth(imgWidth);
+        shwnImg.updateHeight(imgHeight);
 
-        return shwnImg;
+        nextImg.updateHeight(imgHeight);
+        nextImg.updateHeight(imgWidth);
+        return shwnImg.getImgView();
     }
 
     /*
      * gets the next image in the array of file paths, circles back to the beginning once at the end of array
      */
     public ImageView getNext(){
-        //reverting to a preview without emphasis
-        imageDeck[index].setFitWidth(imageDeckHeight);
-        imageDeck[index].setFitHeight(imageDeckHeight);
-
-        if(index + 1 != imagePaths.length){
-            index++;
-        }
-        else{
+        if(index + 1 == imagePaths.length){
             index = 0;
         }
+        else{
+            index++;
+        }
         // emphasizing new image
-        imageDeck[index].setFitWidth(imageDeckHeight + imageDeckEmphasis);
-        imageDeck[index].setFitHeight(imageDeckHeight + imageDeckEmphasis);
+        ShownImage out = nextImg;
+        out.updateHeight(imgHeight);
+        out.updateWidth(imgWidth);
 
-        return getImage();
+        prevImg = shwnImg;
+
+        if (index + 1 == imagePaths.length){
+            nextImg = new ShownImage(fPath + "\\" + imagePaths[0]);
+        }
+        else{
+            nextImg = new ShownImage(fPath + "\\" + imagePaths[index+1]);
+        }
+        nextImg.updateHeight(imgHeight);
+        nextImg.updateWidth(imgWidth);
+
+        shwnImg = out;
+
+        createImageDeck();
+
+        return out.getImgView();
     }
 
     /*
      * gets the previous image in the array of file paths, circles back to the end once at the start of the array
      */
     public ImageView getPrevious(){
-        //reverting to a preview without emphasis
-        imageDeck[index].setFitWidth(imageDeckHeight);
-        imageDeck[index].setFitHeight(imageDeckHeight);
         if (index - 1 < 0){
             index = imagePaths.length - 1;
         }
         else{
             index--;
         }
-        // emphasizing new image
-        imageDeck[index].setFitWidth(imageDeckHeight + imageDeckEmphasis);
-        imageDeck[index].setFitHeight(imageDeckHeight + imageDeckEmphasis);
 
-        return getImage();
+        ShownImage out = prevImg;
+        out.updateHeight(imgHeight);
+        out.updateWidth(imgWidth);
+
+        nextImg = shwnImg;
+
+        if (index - 1 < 0) {
+            prevImg = new ShownImage(fPath + "\\" + imagePaths[imagePaths.length - 1]);
+        }
+        else {
+            prevImg = new ShownImage(fPath + "\\" + imagePaths[index - 1]);
+        }
+        prevImg.updateWidth(imgWidth);
+        prevImg.updateHeight(imgHeight);
+
+        shwnImg = out;
+
+        createImageDeck();
+
+        return out.getImgView();
     }
 
     /*
