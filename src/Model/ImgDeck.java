@@ -94,12 +94,19 @@ public class ImgDeck {
 
         prevImg = shwnImg;
 
-        nextImg = new ShownImage(fPath + "\\" + imagePaths[index]);
+        if (index + 1 == imagePaths.length){
+            nextImg = new ShownImage(fPath + "\\" + imagePaths[0]);
+        }
+        else{
+            nextImg = new ShownImage(fPath + "\\" + imagePaths[index+1]);
+        }
         nextImg.updateHeight(imgHeight);
         nextImg.updateWidth(imgWidth);
 
         shwnImg = out;
+
         createImageDeck();
+
         return out.getImgView();
     }
 
@@ -120,11 +127,19 @@ public class ImgDeck {
 
         nextImg = shwnImg;
 
-        prevImg = new ShownImage(fPath + "\\" + imagePaths[index]);
+        if (index - 1 < 0) {
+            prevImg = new ShownImage(fPath + "\\" + imagePaths[imagePaths.length - 1]);
+        }
+        else {
+            prevImg = new ShownImage(fPath + "\\" + imagePaths[index - 1]);
+        }
         prevImg.updateWidth(imgWidth);
         prevImg.updateHeight(imgHeight);
+
         shwnImg = out;
+
         createImageDeck();
+
         return out.getImgView();
     }
 
