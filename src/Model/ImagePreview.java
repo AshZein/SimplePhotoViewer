@@ -8,18 +8,25 @@ import javafx.scene.image.Image;
 public class ImagePreview {
     Image image;
     double dimension;
+    Canvas canvas;
     public ImagePreview(Image image, double dimension){
         this.image = image;
         this.dimension = dimension;
+        canvas = new Canvas(dimension, dimension);
     }
 
     public void updateDimension(double size){
         dimension = size;
+        canvas.setWidth(dimension);
+        canvas.setHeight(dimension);
     }
 
     public Canvas getCanvas(){
-        Canvas canvas = new Canvas(dimension, dimension); //creating a square canvas
         GraphicsContext gc = canvas.getGraphicsContext2D();
+        gc.drawImage(image, 0, 0);
+        canvas.setWidth(image.getWidth());
+        canvas.setId(image.getUrl()+"_CANVAS");
+        return canvas;
     }
 
 }
