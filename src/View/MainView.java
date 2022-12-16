@@ -57,6 +57,7 @@ public class MainView {
         nextButton.setOnAction(e -> {
             imgV = control.nextImage();
             bPane.setCenter(imgV);
+            stage.setTitle(imgV.getId());
             bPane.requestFocus();
         });
 
@@ -89,7 +90,6 @@ public class MainView {
         bPane.setOnKeyPressed(new EventHandler<KeyEvent>(){
             public void handle(KeyEvent keyEvent){
                 String code = keyEvent.getCode().getName();
-                System.out.println(code);
                 boolean changed = false;
                 if (code.equals("Left")){
                     imgV = control.previousImage();
