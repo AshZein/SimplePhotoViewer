@@ -36,6 +36,9 @@ public class MainView {
     double bPaneLWidth;
     double bPaneBottomHeight;
 
+    double sceneWidth = 1200;
+    double sceneHeight = 650;
+
     public MainView(Stage stage) {
         this.stage = stage;
         control = new Controller();
@@ -126,7 +129,7 @@ public class MainView {
         imgV = control.getImage();
         bPane.setCenter(imgV);
 
-        scene = new Scene(bPane, 1200, 650);
+        scene = new Scene(bPane, sceneWidth, sceneHeight);
 
         // got following listeners from: https://blog.idrsolutions.com/2012/11/adding-a-window-resize-listener-to-javafx-scene/
         scene.widthProperty().addListener(new ChangeListener<Number>() {
