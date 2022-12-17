@@ -91,7 +91,7 @@ public class ImgDeck {
      * gets the next image in the array of file paths, circles back to the beginning once at the end of array
      */
     public ImageView getNext(){
-        updatePreview(index, imageDeckHeight);
+        updatePreview(index, imageDeckHeight); //reverting previously shown image's preview to a normal size
 
         if(index + 1 == imagePaths.length){
             index = 0;
@@ -112,7 +112,8 @@ public class ImgDeck {
         else{
             nextImg = new ShownImage(fPath + "\\" + imagePaths[index+1]);
         }
-        updatePreview(index, imageDeckHeight + imageDeckEmphasis);
+
+        updatePreview(index, imageDeckHeight + imageDeckEmphasis); // Emphasizing new image's preview size
 
         nextImg.updateHeight(imgHeight);
         nextImg.updateWidth(imgWidth);
@@ -126,7 +127,7 @@ public class ImgDeck {
      * gets the previous image in the array of file paths, circles back to the end once at the start of the array
      */
     public ImageView getPrevious(){
-        updatePreview(index, imageDeckHeight);
+        updatePreview(index, imageDeckHeight); //reverting previously shown image's preview to a normal size
         if (index - 1 < 0){
             index = imagePaths.length - 1;
         }
@@ -146,7 +147,7 @@ public class ImgDeck {
         else {
             prevImg = new ShownImage(fPath + "\\" + imagePaths[index - 1]);
         }
-        updatePreview(index, imageDeckHeight + imageDeckEmphasis);
+        updatePreview(index, imageDeckHeight + imageDeckEmphasis); // Emphasizing new image's preview size
 
         prevImg.updateWidth(imgWidth);
         prevImg.updateHeight(imgHeight);
@@ -155,7 +156,9 @@ public class ImgDeck {
 
         return out.getImgView();
     }
-
+    /*
+     * updates the preview image at the bottom to emphasize the currently shown image
+     */
     private void updatePreview(int index, double size){
         ImagePreview replacement = new ImagePreview(new Image(fPath + "\\" + imagePaths[index], size, size, true, false), size);
         imageDeck.getChildren().set(index, replacement.getCanvas());

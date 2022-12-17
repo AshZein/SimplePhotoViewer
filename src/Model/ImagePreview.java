@@ -15,12 +15,18 @@ public class ImagePreview {
         canvas = new Canvas(dimension, dimension);
     }
 
+    /*
+     * updates the canvas dimensions
+     */
     public void updateDimension(double size){
         dimension = size;
         canvas.setWidth(dimension);
         canvas.setHeight(dimension);
     }
 
+    /*
+     * draws the image on the canvas and returns the canvas
+     */
     public Canvas getCanvas(){
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.drawImage(image, 0, 0);

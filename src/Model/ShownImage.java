@@ -27,12 +27,18 @@ public class ShownImage {
         this.currImg = new Image(currImgPath);
     }
 
+    /*
+     * returns an image view of the stored image
+     */
     public ImageView getImgView(){
         ImageView imgView = new ImageView(currImg);
         imgView.setId(id);
         return fitToScreen(imgView);
     }
 
+    /*
+     * adjusts imageView to fit the desired boundaries
+     */
     private ImageView fitToScreen(ImageView imgView){
         imgView.setPreserveRatio(true);
         imgView.setFitHeight(sceneHeight);
@@ -40,6 +46,9 @@ public class ShownImage {
         return imgView;
     }
 
+    /*
+     * returns an Image object of the stored image
+     */
     public Image getImage(){
         return currImg;
     }

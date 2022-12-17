@@ -83,23 +83,21 @@ public class MainView {
         rightButtons.setAlignment(Pos.CENTER);
 
         bPane = new BorderPane();
-
         bPane.setStyle(themeCont.getBackColour());
-
-
-
 
         bPane.setRight(rightButtons);
         bPane.setLeft(leftButtons);
         bPane.setBottom(bottomPreview);
         bPane.requestFocus();
 
+        // storing the dimensions of parts of the borderpane, used in calculations for other methods and actions
         bPaneRWidth = bPane.getRight().getLayoutBounds().getWidth();
         bPaneLWidth = bPane.getLeft().getLayoutBounds().getWidth();
         bPaneBottomHeight = bPane.getBottom().getLayoutBounds().getHeight();
 
+        // setting the image to the center of the borderpane
         control.setSceneWidth(bPane.getBottom().getLayoutBounds().getWidth());
-        control.setSceneHeight(650-bPaneBottomHeight);
+        control.setSceneHeight(sceneHeight-bPaneBottomHeight);
         imgV = control.getImage();
         bPane.setCenter(imgV);
 
@@ -122,20 +120,23 @@ public class MainView {
                 imgV.setFitHeight(adjustment);
             }
         });
-
+        // Event filter for left and right arrow keys
         scene.addEventFilter(KeyEvent.KEY_PRESSED, e->{
                 String code = e.getCode().getName();
                 boolean changed = false;
+                // get the previous image if left arrow key is pressed
                 if (code.equals("Left")){
                     imgV = control.previousImage();
                     bPane.setCenter(imgV);
                     changed = true;
                 }
+                // get the next image if the right arrow key is pressed
                 else if(code.equals("Right")){
                     imgV = control.nextImage();
                     bPane.setCenter(imgV);
                     changed = true;
                 }
+                // only need to update stage title if a left or right arrow key is pressed
                 if(changed) {
                     stage.setTitle(imgV.getId());
                     bPane.requestFocus();
