@@ -31,12 +31,23 @@ public class ImgDeck {
         index = 0;
 
         assert imagePaths != null;
-        if(imagePaths.length >= 2){
+        if (imagePaths.length == 0){
+            shwnImg = null;
+            nextImg = null;
+            prevImg = null;
+        }
+        else if (imagePaths.length == 1){
+            shwnImg = new ShownImage(fPath + "\\" + imagePaths[index]);
+            nextImg = shwnImg;
+            prevImg = shwnImg;
+        }
+        else if(imagePaths.length >= 2){
+            shwnImg = new ShownImage(fPath + "\\" + imagePaths[index]);
             nextImg = new ShownImage(fPath + "\\" + imagePaths[index + 1]);
             prevImg = new ShownImage(fPath + "\\" + imagePaths[imagePaths.length - 1]);
         }
+
         createImageDeck();
-        shwnImg = new ShownImage(fPath + "\\" + imagePaths[index]);
     }
 
     private void createImageDeck(){
