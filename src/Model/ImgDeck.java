@@ -52,23 +52,24 @@ public class ImgDeck {
 
     private void createImageDeck(){
         imageDeck = new HBox();
-        for (int i = 0; i < imagePaths.length; i++){
-            Image image = new Image(fPath + "\\" + imagePaths[i], imageDeckHeight, imageDeckHeight, true, false);
-            ImagePreview curr;
-            if (i == index){
-                // The currently shown image should be emphasized in the bottom preview
-                image = new Image(fPath + "\\" + imagePaths[i], imageDeckHeight + imageDeckEmphasis, imageDeckHeight + imageDeckEmphasis, true, false);
-                curr = new ImagePreview(image, imageDeckHeight + imageDeckEmphasis);
-                curr.updateDimension(imageDeckHeight + imageDeckEmphasis);
+        if (imagePaths.length >= 1) {
+            for (int i = 0; i < imagePaths.length; i++) {
+                Image image = new Image(fPath + "\\" + imagePaths[i], imageDeckHeight, imageDeckHeight, true, false);
+                ImagePreview curr;
+                if (i == index) {
+                    // The currently shown image should be emphasized in the bottom preview
+                    image = new Image(fPath + "\\" + imagePaths[i], imageDeckHeight + imageDeckEmphasis, imageDeckHeight + imageDeckEmphasis, true, false);
+                    curr = new ImagePreview(image, imageDeckHeight + imageDeckEmphasis);
+                    curr.updateDimension(imageDeckHeight + imageDeckEmphasis);
+                } else {
+                    curr = new ImagePreview(image, imageDeckHeight);
+                }
+                imageDeck.getChildren().add(curr.getCanvas());
             }
-            else {
-                curr = new ImagePreview(image, imageDeckHeight);
-            }
-            imageDeck.getChildren().add(curr.getCanvas());
+            imageDeck.setMaxHeight(imageDeckHeight + imageDeckEmphasis);
+            imageDeck.setAlignment(Pos.CENTER);
+            imageDeck.setPadding(new Insets(5, 5, 5, 5));
         }
-        imageDeck.setMaxHeight(imageDeckHeight + imageDeckEmphasis);
-        imageDeck.setAlignment(Pos.CENTER);
-        imageDeck.setPadding(new Insets(5,5,5,5));
     }
 
     public HBox getImageDeck(){
