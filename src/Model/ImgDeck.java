@@ -31,7 +31,7 @@ public class ImgDeck {
         index = 0;
 
         assert imagePaths != null;
-        if(imagePaths.length > 2){
+        if(imagePaths.length >= 2){
             nextImg = new ShownImage(fPath + "\\" + imagePaths[index + 1]);
             prevImg = new ShownImage(fPath + "\\" + imagePaths[imagePaths.length - 1]);
         }
