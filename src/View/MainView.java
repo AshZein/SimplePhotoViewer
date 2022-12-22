@@ -115,10 +115,22 @@ public class MainView {
         scene.heightProperty().addListener(new ChangeListener<Number>() {
             @Override public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneHeight, Number newSceneHeight) {
                 double adjustment = scene.getHeight() - bPaneBottomHeight;
-                control.setSceneHeight(adjustment);
+                System.out.println(adjustment);
+                System.out.println(stage.getHeight());
+                if(scene.getHeight() > stage.getMinHeight()) {
+                    control.setSceneHeight(adjustment);
 
-                imgV = control.getImage();
-                bPane.setCenter(imgV);
+                    imgV = control.getImage();
+                    bPane.setCenter(imgV);
+                }
+                else{
+                    System.out.println("HEERERER");
+                    stage.setHeight(stage.getMinHeight());
+
+                    control.setSceneHeight(scene.getHeight() - bPaneBottomHeight);
+                    imgV = control.getImage();
+                    bPane.setCenter(imgV);
+                }
             }
         });
         // Event filter for left and right arrow keys
@@ -145,6 +157,8 @@ public class MainView {
         });
         stage.setTitle(imgV.getId());
         stage.setScene(scene);
+        stage.setMinHeight(350+bPaneBottomHeight); // sets the minimum height for the stage
+        stage.setMinWidth(450);
         stage.show();
     }
 
