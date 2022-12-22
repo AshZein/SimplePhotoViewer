@@ -8,9 +8,9 @@ import javafx.scene.layout.HBox;
 
 public class Controller {
     ThemeControl themeCont;
-    //String imgFPath = System.getProperty("user.dir") + "\\TestImages";
+    String imgFPath = System.getProperty("user.dir") + "\\TestImages";
     //String imgFPath = System.getProperty("user.dir") + "\\TestImagesSmall";
-    String imgFPath = System.getProperty("user.dir") + "\\TestImagesSingle";
+    //String imgFPath = System.getProperty("user.dir") + "\\TestImagesSingle";
     ImgDeck imgD;
 
     public Controller(){
