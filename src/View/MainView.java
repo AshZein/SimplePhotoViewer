@@ -117,7 +117,8 @@ public class MainView {
                 double adjustment = scene.getHeight() - bPaneBottomHeight;
                 control.setSceneHeight(adjustment);
 
-                imgV.setFitHeight(adjustment);
+                imgV = control.getImage();
+                bPane.setCenter(imgV);
             }
         });
         // Event filter for left and right arrow keys
